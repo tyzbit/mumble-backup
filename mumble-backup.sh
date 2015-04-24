@@ -1,6 +1,6 @@
 #!/bin/bash
 # Daily, Weekly, Monthly backups of mumble sqlite DB
-# version 1
+# version 2
 # TODO: restore functionality
 
 # Where is your mumble sqlite DB?
@@ -13,7 +13,7 @@ backupdir=/root/mumble-db-backups
 globalnumdays=7
 
 
-todayslog=/var/log/mumble-backup.$(date +%Y%m%d)
+log=/var/log/mumble-backup.log
 #
 # basic usage
 #
@@ -35,13 +35,13 @@ function backup ()
 	if [ -d $backupdir ]; then
 		echo $(timestamp)"Starting Backup"
 		# copy the file
-		cp $mumbledbdir/$mumbledb $backupdir/$mumbledb.$(date +%Y%m%d) >> $todayslog
+		cp $mumbledbdir/$mumbledb $backupdir/$mumbledb.$(date +%Y%m%d) >> $log
 		# did copy run into issues?
 		exit=$?
 		if [ $exit -eq 0 ]; then
 			echo $(timestamp)"Finished Backup with no errors"
 		else
-			echo $(timestamp)"Finished Backup, errors seen, check "$todayslog" for more information"
+			echo $(timestamp)"Finished Backup, errors seen, check "$log" for more information"
 			exit 1
 		fi
 	else
@@ -63,7 +63,7 @@ function cleanup ()
 		# did find encounter any issues
 		exit=$?
 		if [ $exit -gt 0 ]; then
-			echo $(timestamp)"Finished Cleanup with Errors, check "$todayslog" for more information"
+			echo $(timestamp)"Finished Cleanup with Errors, check "$log" for more information"
 			exit 1
 		fi
 	echo $(timestamp)"Finished Cleanup with no errors"
