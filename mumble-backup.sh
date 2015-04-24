@@ -98,7 +98,7 @@ while [ $# -ne 0 ]; do
 			shift
 			backup
 			;;
-		-c | --cleanup | backup)
+		-c | --cleanup | cleanup)
 			shift
 			# if -d was specified after cleanup, then user wanted to specify the number of days to keep.  store that in a variable here
 			if [[ $1 == "-d" ]]; then
