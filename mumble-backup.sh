@@ -22,10 +22,10 @@ mumblegroup=$mumbleuser
 
 function usage ()
 {
-	echo "Usage: "$0" [-b|backup|--backup] [-c|cleanup|--cleanup [-d days]] [-r|restore|--restore]"
+	echo "Usage: "$0" [-b|backup|--backup] [-c|cleanup|--cleanup [-d days]] [-r|restore|--restore [-y]]"
 	echo -e "  -b, [--]backup \tperform a backup"
 	echo -e "  -c, [--]cleanup \tperform a cleanup (use -d to specify the number of days to keep)"
-	echo -e "  -r, [--]restore \tperform a restore"
+	echo -e "  -r, [--]restore \tperform a restore (use -y to blindly restore from yesterday's backup)"
 }
 
 # 
