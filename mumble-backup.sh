@@ -19,7 +19,6 @@ mumblegroup=$mumbleuser
 #
 # basic usage
 #
-
 function usage ()
 {
 	echo "Usage: "$0" [-b|backup|--backup] [-c|cleanup|--cleanup [-d days]] [-r|restore|--restore [-y]]"
@@ -147,6 +146,9 @@ function restorebackup ()
 	fi
 }
 
+#
+# Add a specially formatted timestamp
+#
 function timestamp ()
 {
 	date "+[%H:%M:%S] %m-%d-%Y : "
