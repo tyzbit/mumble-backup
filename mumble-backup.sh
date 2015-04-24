@@ -20,11 +20,10 @@ todayslog=/var/log/mumble-backup.$(date +%Y%m%d)
 
 function usage ()
 {
-	echo "Usage:"
-	echo $0" -b [--]backup : perform a backup"
-	echo $0" -c [--]cleanup : perform a cleanup"
-	echo -e "\t optional: -d days : specify the number of days to keep"
-	echo $0" -r [--]restore : perform a restore"
+	echo "Usage: "$0" [-b|backup|--backup] [-c|cleanup|--cleanup [-d days]] [-r|restore|--restore]"
+	echo -e "  -b, [--]backup \tperform a backup"
+	echo -e "  -c, [--]cleanup \tperform a cleanup (use -d to specify the number of days to keep)"
+	echo -e "  -r, [--]restore \tperform a restore"
 }
 
 #
