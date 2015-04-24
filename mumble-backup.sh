@@ -1,9 +1,10 @@
 #!/bin/bash
 # Daily, Weekly, Monthly backups of mumble sqlite DB
 # version 1
+# TODO: restore functionality
 
 # Where is your mumble sqlite DB?
-mumbledbdir=/var/lib/mumble-server/
+mumbledbdir=/var/lib/mumble-server
 # What is the file called?
 mumbledb=mumble-server.sqlite
 # Where do you want to store the backups?
@@ -20,10 +21,10 @@ todayslog=/var/log/mumble-backup.$(date +%Y%m%d)
 function usage ()
 {
 	echo "Usage:"
-	echo $0" [backup | -b | --backup] : perform a backup"
-	echo $0" [cleanup | -b | --cleanup] : perform a cleanup"
-	echo -e "\t optional: [-d days]: specify the number of days to keep"
-	echo $0" [restore | -b | --restore] : perform a restore"
+	echo $0" -b [--]backup : perform a backup"
+	echo $0" -c [--]cleanup : perform a cleanup"
+	echo -e "\t optional: -d days : specify the number of days to keep"
+	echo $0" -r [--]restore : perform a restore"
 }
 
 #
@@ -52,6 +53,7 @@ function backup ()
 
 #
 # Clean up the backup directory
+# Arguments: number of days to keep
 #
 function cleanup () 
 {
@@ -113,7 +115,7 @@ while [ $# -ne 0 ]; do
 			break
 			;;
 		*)
-			echo "Unexpected command switch"
+			echo "Bad command, check --help for usage"
 			exit 1
 	esac
 done
