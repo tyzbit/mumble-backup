@@ -40,7 +40,7 @@ function backup ()
 		# did copy run into issues?
 		exit=$?
 		if [ $exit -eq 0 ]; then
-			echo "Finished Backup, with no errors"
+			echo "Finished Backup with no errors"
 		else
 			echo "Finished Backup, errors seen, check "$todayslog" for more information"
 			exit 1
