@@ -34,19 +34,19 @@ function backup ()
 {
 	# check backupdir exists first
 	if [ -d $backupdir ]; then
-		echo "Starting Backup"
+		echo $(timestamp)"Starting Backup"
 		# copy the file
 		cp $mumbledbdir/$mumbledb $backupdir/$mumbledb.$(date +%Y%m%d) >> $todayslog
 		# did copy run into issues?
 		exit=$?
 		if [ $exit -eq 0 ]; then
-			echo "Finished Backup with no errors"
+			echo $(timestamp)"Finished Backup with no errors"
 		else
-			echo "Finished Backup, errors seen, check "$todayslog" for more information"
+			echo $(timestamp)"Finished Backup, errors seen, check "$todayslog" for more information"
 			exit 1
 		fi
 	else
-		echo "Backup directory does not exist, expecting the path "$backupdir
+		echo $(timestamp)"Backup directory does not exist, expecting the path "$backupdir
 		exit 1
 	fi
 }
@@ -57,17 +57,17 @@ function backup ()
 #
 function cleanup () 
 {
-	echo "Staring Cleanup"
-		echo "Deleting backups older than "$1" days"
+	echo $(timestamp)"Staring Cleanup"
+		echo $(timestamp)"Deleting Backups older than "$1" days"
 		# find all files in the directory that are older than numdays (specified above), and remove them
 		find $backupdir -mtime +$1 -exec rm -f {} \;
 		# did find encounter any issues
 		exit=$?
 		if [ $exit -gt 0 ]; then
-			echo "Finished Cleanup with Errors, check "$todayslog" for more information"
+			echo $(timestamp)"Finished Cleanup with Errors, check "$todayslog" for more information"
 			exit 1
 		fi
-	echo "Finished Cleanup with no errors"
+	echo $(timestamp)"Finished Cleanup with no errors"
 }
 
 #
@@ -79,8 +79,13 @@ function restorebackup ()
 	echo "not finished yet"
 	exit 1
 }
-# User did not specify any arguments
 
+function timestamp ()
+{
+	date "+[%H:%M:%S] %m-%d-%Y : "
+}
+
+# User did not specify any arguments
 if [[ $# -eq 0 ]]; then
 	usage
 	exit 1
@@ -115,7 +120,7 @@ while [ $# -ne 0 ]; do
 			break
 			;;
 		*)
-			echo "Bad command, check --help for usage"
+			echo $(timestamp)"Bad command, check --help for usage"
 			exit 1
 	esac
 done
