@@ -1,6 +1,8 @@
 # mumble-backup
 Script for maintaining backups of a Mumble SQLite DB
 
+## This repository is archived and unsupported.  Code here is for historical and learning purposes.
+
 ## Usage:
 Edit the settings near the top of the script to match your configuration
 
